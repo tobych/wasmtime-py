@@ -1,0 +1,3717 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>wasmtime API documentation</title>
+<meta name="description" content="Python bindings for the [Wasmtime project] …" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Package <code>wasmtime</code></h1>
+</header>
+<section id="section-intro">
+<p>Python bindings for the <a href="https://github.com/bytecodealliance/wasmtime">Wasmtime project</a></p>
+<p>This library binds the <a href="https://github.com/bytecodealliance/wasmtime">Wasmtime project</a>'s C API to provide an implementation
+of a WebAssembly JIT compiler to Python. You can validate, compile, instantiate,
+and interact with WebAssembly modules via this library.</p>
+<p>The API of this library is intended to be very similar to the <a href="https://docs.rs/wasmtime"><code>wasmtime</code> Rust
+crate</a>, so if you find the docs are lacking here feel
+free to consult that documentation as well. While not exactly the same the two
+libraries are intended to be quite similar.</p>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Python bindings for the [Wasmtime project]
+
+[Wasmtime project]: https://github.com/bytecodealliance/wasmtime
+
+This library binds the [Wasmtime project]&#39;s C API to provide an implementation
+of a WebAssembly JIT compiler to Python. You can validate, compile, instantiate,
+and interact with WebAssembly modules via this library.
+
+The API of this library is intended to be very similar to the [`wasmtime` Rust
+crate](https://docs.rs/wasmtime), so if you find the docs are lacking here feel
+free to consult that documentation as well. While not exactly the same the two
+libraries are intended to be quite similar.
+&#34;&#34;&#34;
+
+from ._error import WasmtimeError
+from ._config import Config
+from ._engine import Engine
+from ._store import Store
+from ._types import FuncType, GlobalType, MemoryType, TableType
+from ._types import ValType, Limits, ImportType, ExportType
+from ._wat2wasm import wat2wasm
+from ._module import Module
+from ._value import Val
+from ._trap import Trap, Frame
+from ._func import Func, Caller
+from ._globals import Global
+from ._table import Table
+from ._memory import Memory
+from ._instance import Instance
+from ._wasi import WasiInstance, WasiConfig
+from ._linker import Linker
+
+__all__ = [
+    &#39;wat2wasm&#39;,
+    &#39;Config&#39;,
+    &#39;Engine&#39;,
+    &#39;Store&#39;,
+    &#39;FuncType&#39;,
+    &#39;GlobalType&#39;,
+    &#39;MemoryType&#39;,
+    &#39;TableType&#39;,
+    &#39;ValType&#39;,
+    &#39;Limits&#39;,
+    &#39;ImportType&#39;,
+    &#39;ExportType&#39;,
+    &#39;Val&#39;,
+    &#39;Func&#39;,
+    &#39;Caller&#39;,
+    &#39;Table&#39;,
+    &#39;Memory&#39;,
+    &#39;Global&#39;,
+    &#39;Trap&#39;,
+    &#39;Frame&#39;,
+    &#39;Module&#39;,
+    &#39;Instance&#39;,
+    &#39;WasiConfig&#39;,
+    &#39;WasiInstance&#39;,
+    &#39;Linker&#39;,
+    &#39;WasmtimeError&#39;,
+]</code></pre>
+</details>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="wasmtime.loader" href="loader.html">wasmtime.loader</a></code></dt>
+<dd>
+<div class="desc"><p>This module is a custom loader for Python which enables importing wasm files
+directly into Python programs simply through usage of the <code>import</code> …</p></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="wasmtime.wat2wasm"><code class="name flex">
+<span>def <span class="ident">wat2wasm</span></span>(<span>wat)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Converts the <a href="https://webassembly.github.io/spec/core/text/index.html">WebAssembly Text format</a> to the binary format.</p>
+<p>This function is intended to be a convenience function for local
+development and you likely don't want to use it extensively in production.
+It's much faster to parse and compile the binary format than it is to
+process the text format.</p>
+<p>Takes a <code>str</code> as input, raises an error if it fails to parse, and returns
+a <code>bytes</code> if conversion/parsing was successful.</p>
+<pre><code class="python">&gt;&gt;&gt; wat2wasm('(module)')
+bytearray(b'\x00asm\x01\x00\x00\x00')
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def wat2wasm(wat):
+    &#34;&#34;&#34;
+    Converts the [WebAssembly Text format][wat] to the binary format.
+
+    This function is intended to be a convenience function for local
+    development and you likely don&#39;t want to use it extensively in production.
+    It&#39;s much faster to parse and compile the binary format than it is to
+    process the text format.
+
+    Takes a `str` as input, raises an error if it fails to parse, and returns
+    a `bytes` if conversion/parsing was successful.
+
+    &gt;&gt;&gt; wat2wasm(&#39;(module)&#39;)
+    bytearray(b&#39;\\x00asm\\x01\\x00\\x00\\x00&#39;)
+
+    [wat]: https://webassembly.github.io/spec/core/text/index.html
+    &#34;&#34;&#34;
+
+    if isinstance(wat, str):
+        wat = wat.encode(&#39;utf8&#39;)
+    wat_buffer = cast(create_string_buffer(wat), POINTER(c_uint8))
+    wat = wasm_byte_vec_t(len(wat), wat_buffer)
+    wasm = wasm_byte_vec_t()
+    error = dll.wasmtime_wat2wasm(byref(wat), byref(wasm))
+    if error:
+        raise WasmtimeError.__from_ptr__(error)
+    else:
+        ret = wasm.to_bytes()
+        dll.wasm_byte_vec_delete(byref(wasm))
+        return ret</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="wasmtime.Caller"><code class="flex name class">
+<span>class <span class="ident">Caller</span></span>
+<span>(</span><span>ptr)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Caller(object):
+    def __init__(self, ptr):
+        self.__ptr__ = ptr
+
+    def __getitem__(self, name):
+        &#34;&#34;&#34;
+        Looks up an export with `name` on the calling module.
+
+        If `name` isn&#39;t defined on the calling module, or if the caller has gone
+        away for some reason, then this will raise a `KeyError`. For more
+        information about when this could fail see the `get` method which
+        returns `None` on failure.
+        &#34;&#34;&#34;
+
+        ret = self.get(name)
+        if ret is None:
+            raise KeyError(&#34;failed to find export {}&#34;.format(name))
+        return ret
+
+    def get(self, name):
+        &#34;&#34;&#34;
+        Looks up an export with `name` on the calling module.
+
+        May return `None` if the export isn&#39;t found, if it&#39;s not a memory (for
+        now), or if the caller has gone away and this `Caller` object has
+        persisted too long.
+        &#34;&#34;&#34;
+
+        # First convert to a raw name so we can typecheck our argument
+        name_raw = str_to_name(name)
+
+        # Next see if we&#39;ve been invalidated
+        if not hasattr(self, &#39;__ptr__&#39;):
+            return None
+
+        # And if we&#39;re not invalidated we can perform the actual lookup
+        ptr = dll.wasmtime_caller_export_get(self.__ptr__, byref(name_raw))
+        if ptr:
+            return wrap_extern(ptr, None)
+        else:
+            return None</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.Caller.get"><code class="name flex">
+<span>def <span class="ident">get</span></span>(<span>self, name)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Looks up an export with <code>name</code> on the calling module.</p>
+<p>May return <code>None</code> if the export isn't found, if it's not a memory (for
+now), or if the caller has gone away and this <code><a title="wasmtime.Caller" href="#wasmtime.Caller">Caller</a></code> object has
+persisted too long.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get(self, name):
+    &#34;&#34;&#34;
+    Looks up an export with `name` on the calling module.
+
+    May return `None` if the export isn&#39;t found, if it&#39;s not a memory (for
+    now), or if the caller has gone away and this `Caller` object has
+    persisted too long.
+    &#34;&#34;&#34;
+
+    # First convert to a raw name so we can typecheck our argument
+    name_raw = str_to_name(name)
+
+    # Next see if we&#39;ve been invalidated
+    if not hasattr(self, &#39;__ptr__&#39;):
+        return None
+
+    # And if we&#39;re not invalidated we can perform the actual lookup
+    ptr = dll.wasmtime_caller_export_get(self.__ptr__, byref(name_raw))
+    if ptr:
+        return wrap_extern(ptr, None)
+    else:
+        return None</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Config"><code class="flex name class">
+<span>class <span class="ident">Config</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Global configuration, used to create an <code><a title="wasmtime.Engine" href="#wasmtime.Engine">Engine</a></code>.</p>
+<p>A <code><a title="wasmtime.Config" href="#wasmtime.Config">Config</a></code> houses a number of configuration options which tweaks how wasm
+code is compiled or generated.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Config(object):
+    &#34;&#34;&#34;
+    Global configuration, used to create an `Engine`.
+
+    A `Config` houses a number of configuration options which tweaks how wasm
+    code is compiled or generated.
+    &#34;&#34;&#34;
+
+    def __init__(self):
+        self.__ptr__ = dll.wasm_config_new()
+
+    @setter_property
+    def debug_info(self, enable):
+        &#34;&#34;&#34;
+        Configures whether DWARF debug information is emitted for the generated
+        code. This can improve profiling and the debugging experience.
+        &#34;&#34;&#34;
+
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_debug_info_set(self.__ptr__, enable)
+
+    @setter_property
+    def wasm_threads(self, enable):
+        &#34;&#34;&#34;
+        Configures whether the wasm [threads proposal] is enabled.
+
+        [threads proposal]: https://github.com/webassembly/threads
+        &#34;&#34;&#34;
+
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_wasm_threads_set(self.__ptr__, enable)
+
+    @setter_property
+    def wasm_reference_types(self, enable):
+        &#34;&#34;&#34;
+        Configures whether the wasm [reference types proposal] is enabled.
+
+        [reference types proposal]: https://github.com/webassembly/reference-types
+        &#34;&#34;&#34;
+
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_wasm_reference_types_set(self.__ptr__, enable)
+
+    @setter_property
+    def wasm_simd(self, enable):
+        &#34;&#34;&#34;
+        Configures whether the wasm [SIMD proposal] is enabled.
+
+        [SIMD proposal]: https://github.com/webassembly/simd
+        &#34;&#34;&#34;
+
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_wasm_simd_set(self.__ptr__, enable)
+
+    @setter_property
+    def wasm_bulk_memory(self, enable):
+        &#34;&#34;&#34;
+        Configures whether the wasm [bulk memory proposal] is enabled.
+
+        [bulk memory proposal]: https://github.com/webassembly/bulk-memory
+        &#34;&#34;&#34;
+
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_wasm_bulk_memory_set(self.__ptr__, enable)
+
+    @setter_property
+    def wasm_multi_value(self, enable):
+        &#34;&#34;&#34;
+        Configures whether the wasm [multi value proposal] is enabled.
+
+        [multi value proposal]: https://github.com/webassembly/multi-value
+        &#34;&#34;&#34;
+
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_wasm_multi_value_set(self.__ptr__, enable)
+
+    @setter_property
+    def strategy(self, strategy):
+        &#34;&#34;&#34;
+        Configures the compilation strategy used for wasm code.
+
+        Acceptable values for `strategy` are:
+
+        * `&#34;auto&#34;`
+        * `&#34;cranelift&#34;`
+        * `&#34;lightbeam&#34;`
+        &#34;&#34;&#34;
+
+        if strategy == &#34;auto&#34;:
+            error = dll.wasmtime_config_strategy_set(self.__ptr__, 0)
+        elif strategy == &#34;cranelift&#34;:
+            error = dll.wasmtime_config_strategy_set(self.__ptr__, 1)
+        elif strategy == &#34;lightbeam&#34;:
+            error = dll.wasmtime_config_strategy_set(self.__ptr__, 2)
+        else:
+            raise WasmtimeError(&#34;unknown strategy: &#34; + str(strategy))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    @setter_property
+    def cranelift_debug_verifier(self, enable):
+        if not isinstance(enable, bool):
+            raise TypeError(&#39;expected a bool&#39;)
+        dll.wasmtime_config_cranelift_debug_verifier_set(self.__ptr__, enable)
+
+    @setter_property
+    def cranelift_opt_level(self, opt_level):
+        if opt_level == &#34;none&#34;:
+            dll.wasmtime_config_cranelift_opt_level_set(self.__ptr__, 0)
+        elif opt_level == &#34;speed&#34;:
+            dll.wasmtime_config_cranelift_opt_level_set(self.__ptr__, 1)
+        elif opt_level == &#34;speed_and_size&#34;:
+            dll.wasmtime_config_cranelift_opt_level_set(self.__ptr__, 2)
+        else:
+            raise WasmtimeError(&#34;unknown opt level: &#34; + str(opt_level))
+
+    @setter_property
+    def profiler(self, profiler):
+        if profiler == &#34;none&#34;:
+            error = dll.wasmtime_config_profiler_set(self.__ptr__, 0)
+        elif profiler == &#34;jitdump&#34;:
+            error = dll.wasmtime_config_profiler_set(self.__ptr__, 1)
+        else:
+            raise WasmtimeError(&#34;unknown profiler: &#34; + str(profiler))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    @setter_property
+    def cache(self, enabled):
+        &#34;&#34;&#34;
+        Configures whether code caching is enabled for this `Config`.
+
+        The value `True` can be passed in here to enable the default caching
+        configuration and location, or a path to a file can be passed in which
+        is a path to a TOML configuration file for the cache.
+
+        More information about cache configuration can be found at
+        https://bytecodealliance.github.io/wasmtime/cli-cache.html
+        &#34;&#34;&#34;
+
+        if isinstance(enabled, bool):
+            if not enabled:
+                raise WasmtimeError(&#34;caching cannot be explicitly disabled&#34;)
+            error = dll.wasmtime_config_cache_config_load(self.__ptr__, 0)
+        elif isinstance(enabled, str):
+            error = dll.wasmtime_config_cache_config_load(self.__ptr__,
+                                                          c_char_p(enabled.encode(&#39;utf-8&#39;)))
+        else:
+            raise TypeError(&#34;expected string or bool&#34;)
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    @setter_property
+    def interruptable(self, enabled):
+        &#34;&#34;&#34;
+        Configures whether wasm execution can be interrupted via interrupt
+        handles.
+        &#34;&#34;&#34;
+
+        if enabled:
+            val = 1
+        else:
+            val = 0
+        dll.wasmtime_config_interruptable_set(self.__ptr__, val)
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasm_config_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Config.cache"><code class="name">var <span class="ident">cache</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether code caching is enabled for this <code><a title="wasmtime.Config" href="#wasmtime.Config">Config</a></code>.</p>
+<p>The value <code>True</code> can be passed in here to enable the default caching
+configuration and location, or a path to a file can be passed in which
+is a path to a TOML configuration file for the cache.</p>
+<p>More information about cache configuration can be found at
+<a href="https://bytecodealliance.github.io/wasmtime/cli-cache.html">https://bytecodealliance.github.io/wasmtime/cli-cache.html</a></p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.cranelift_debug_verifier"><code class="name">var <span class="ident">cranelift_debug_verifier</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="wasmtime.Config.cranelift_opt_level"><code class="name">var <span class="ident">cranelift_opt_level</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="wasmtime.Config.debug_info"><code class="name">var <span class="ident">debug_info</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether DWARF debug information is emitted for the generated
+code. This can improve profiling and the debugging experience.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.interruptable"><code class="name">var <span class="ident">interruptable</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether wasm execution can be interrupted via interrupt
+handles.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.profiler"><code class="name">var <span class="ident">profiler</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="wasmtime.Config.strategy"><code class="name">var <span class="ident">strategy</span></code></dt>
+<dd>
+<div class="desc"><p>Configures the compilation strategy used for wasm code.</p>
+<p>Acceptable values for <code>strategy</code> are:</p>
+<ul>
+<li><code>"auto"</code></li>
+<li><code>"cranelift"</code></li>
+<li><code>"lightbeam"</code></li>
+</ul>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.wasm_bulk_memory"><code class="name">var <span class="ident">wasm_bulk_memory</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether the wasm <a href="https://github.com/webassembly/bulk-memory">bulk memory proposal</a> is enabled.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.wasm_multi_value"><code class="name">var <span class="ident">wasm_multi_value</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether the wasm <a href="https://github.com/webassembly/multi-value">multi value proposal</a> is enabled.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.wasm_reference_types"><code class="name">var <span class="ident">wasm_reference_types</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether the wasm <a href="https://github.com/webassembly/reference-types">reference types proposal</a> is enabled.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.wasm_simd"><code class="name">var <span class="ident">wasm_simd</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether the wasm <a href="https://github.com/webassembly/simd">SIMD proposal</a> is enabled.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.Config.wasm_threads"><code class="name">var <span class="ident">wasm_threads</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether the wasm <a href="https://github.com/webassembly/threads">threads proposal</a> is enabled.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Engine"><code class="flex name class">
+<span>class <span class="ident">Engine</span></span>
+<span>(</span><span>config=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Engine(object):
+    def __init__(self, config=None):
+        if config is None:
+            self.__ptr__ = dll.wasm_engine_new()
+        elif not isinstance(config, Config):
+            raise TypeError(&#34;expected Config&#34;)
+        elif not hasattr(config, &#39;__ptr__&#39;):
+            raise WasmtimeError(&#34;Config already used&#34;)
+        else:
+            ptr = config.__ptr__
+            delattr(config, &#39;__ptr__&#39;)
+            self.__ptr__ = dll.wasm_engine_new_with_config(ptr)
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasm_engine_delete(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ExportType"><code class="flex name class">
+<span>class <span class="ident">ExportType</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ExportType(object):
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_exporttype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = cast(cast(ptr, c_void_p).value, P_wasm_exporttype_t)
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def name(self):
+        &#34;&#34;&#34;
+        Returns the name in the modulethis export type refers to
+        &#34;&#34;&#34;
+        return dll.wasm_exporttype_name(self.__ptr__).contents.to_str()
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Returns the type that this export refers to
+        &#34;&#34;&#34;
+        ptr = dll.wasm_exporttype_type(self.__ptr__)
+        return wrap_externtype(ptr, self.__owner__ or self)
+
+    def __del__(self):
+        if self.__owner__ is None:
+            dll.wasm_exporttype_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.ExportType.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the name in the modulethis export type refers to</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self):
+    &#34;&#34;&#34;
+    Returns the name in the modulethis export type refers to
+    &#34;&#34;&#34;
+    return dll.wasm_exporttype_name(self.__ptr__).contents.to_str()</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ExportType.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the type that this export refers to</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Returns the type that this export refers to
+    &#34;&#34;&#34;
+    ptr = dll.wasm_exporttype_type(self.__ptr__)
+    return wrap_externtype(ptr, self.__owner__ or self)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Frame"><code class="flex name class">
+<span>class <span class="ident">Frame</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Frame(object):
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_frame_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def func_index(self):
+        &#34;&#34;&#34;
+        Returns the function index this frame corresponds to in its wasm module
+        &#34;&#34;&#34;
+
+        return dll.wasm_frame_func_index(self.__ptr__)
+
+    @property
+    def func_name(self):
+        &#34;&#34;&#34;
+        Returns the name of the function this frame corresponds to
+
+        May return `None` if no name can be inferred
+        &#34;&#34;&#34;
+
+        ptr = dll.wasmtime_frame_func_name(self.__ptr__)
+        if ptr:
+            return ptr.contents.to_str()
+        else:
+            return None
+
+    @property
+    def module_name(self):
+        &#34;&#34;&#34;
+        Returns the name of the module this frame corresponds to
+
+        May return `None` if no name can be inferred
+        &#34;&#34;&#34;
+
+        ptr = dll.wasmtime_frame_module_name(self.__ptr__)
+        if ptr:
+            return ptr.contents.to_str()
+        else:
+            return None
+
+    @property
+    def module_offset(self):
+        &#34;&#34;&#34;
+        Returns the offset of this frame&#39;s program counter into the original
+        wasm source module.
+        &#34;&#34;&#34;
+
+        return dll.wasm_frame_module_offset(self.__ptr__)
+
+    @property
+    def func_offset(self):
+        &#34;&#34;&#34;
+        Returns the offset of this frame&#39;s program counter into the original
+        wasm function.
+        &#34;&#34;&#34;
+
+        return dll.wasm_frame_func_offset(self.__ptr__)
+
+    def __del__(self):
+        if self.__owner__ is None:
+            dll.wasm_frame_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Frame.func_index"><code class="name">var <span class="ident">func_index</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the function index this frame corresponds to in its wasm module</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def func_index(self):
+    &#34;&#34;&#34;
+    Returns the function index this frame corresponds to in its wasm module
+    &#34;&#34;&#34;
+
+    return dll.wasm_frame_func_index(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Frame.func_name"><code class="name">var <span class="ident">func_name</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the name of the function this frame corresponds to</p>
+<p>May return <code>None</code> if no name can be inferred</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def func_name(self):
+    &#34;&#34;&#34;
+    Returns the name of the function this frame corresponds to
+
+    May return `None` if no name can be inferred
+    &#34;&#34;&#34;
+
+    ptr = dll.wasmtime_frame_func_name(self.__ptr__)
+    if ptr:
+        return ptr.contents.to_str()
+    else:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Frame.func_offset"><code class="name">var <span class="ident">func_offset</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the offset of this frame's program counter into the original
+wasm function.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def func_offset(self):
+    &#34;&#34;&#34;
+    Returns the offset of this frame&#39;s program counter into the original
+    wasm function.
+    &#34;&#34;&#34;
+
+    return dll.wasm_frame_func_offset(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Frame.module_name"><code class="name">var <span class="ident">module_name</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the name of the module this frame corresponds to</p>
+<p>May return <code>None</code> if no name can be inferred</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def module_name(self):
+    &#34;&#34;&#34;
+    Returns the name of the module this frame corresponds to
+
+    May return `None` if no name can be inferred
+    &#34;&#34;&#34;
+
+    ptr = dll.wasmtime_frame_module_name(self.__ptr__)
+    if ptr:
+        return ptr.contents.to_str()
+    else:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Frame.module_offset"><code class="name">var <span class="ident">module_offset</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the offset of this frame's program counter into the original
+wasm source module.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def module_offset(self):
+    &#34;&#34;&#34;
+    Returns the offset of this frame&#39;s program counter into the original
+    wasm source module.
+    &#34;&#34;&#34;
+
+    return dll.wasm_frame_module_offset(self.__ptr__)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Func"><code class="flex name class">
+<span>class <span class="ident">Func</span></span>
+<span>(</span><span>store, ty, func, access_caller=False)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a new func in <code>store</code> with the given <code>ty</code> which calls the closure
+given</p>
+<p>The <code>func</code> is called with the parameters natively and they'll have native
+Python values rather than being wrapped in <code><a title="wasmtime.Val" href="#wasmtime.Val">Val</a></code>. If <code>access_caller</code> is
+set to <code>True</code> then the first argument given to <code>func</code> is an instance of
+type <code><a title="wasmtime.Caller" href="#wasmtime.Caller">Caller</a></code> below.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Func(object):
+    def __init__(self, store, ty, func, access_caller=False):
+        &#34;&#34;&#34;
+        Creates a new func in `store` with the given `ty` which calls the closure
+        given
+
+        The `func` is called with the parameters natively and they&#39;ll have native
+        Python values rather than being wrapped in `Val`. If `access_caller` is
+        set to `True` then the first argument given to `func` is an instance of
+        type `Caller` below.
+        &#34;&#34;&#34;
+
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+        if not isinstance(ty, FuncType):
+            raise TypeError(&#34;expected a FuncType&#34;)
+        idx = FUNCTIONS.allocate((func, ty.params, ty.results, store))
+        if access_caller:
+            ptr = dll.wasmtime_func_new_with_env(
+                store.__ptr__,
+                ty.__ptr__,
+                trampoline_with_caller,
+                idx,
+                finalize)
+        else:
+            ptr = dll.wasm_func_new_with_env(
+                store.__ptr__, ty.__ptr__, trampoline, idx, finalize)
+        if not ptr:
+            FUNCTIONS.deallocate(idx)
+            raise WasmtimeError(&#34;failed to create func&#34;)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_func_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Gets the type of this func as a `FuncType`
+        &#34;&#34;&#34;
+        ptr = dll.wasm_func_type(self.__ptr__)
+        return FuncType.__from_ptr__(ptr, None)
+
+    @property
+    def param_arity(self):
+        &#34;&#34;&#34;
+        Returns the number of parameters this function expects
+        &#34;&#34;&#34;
+        return dll.wasm_func_param_arity(self.__ptr__)
+
+    @property
+    def result_arity(self):
+        &#34;&#34;&#34;
+        Returns the number of results this function produces
+        &#34;&#34;&#34;
+        return dll.wasm_func_result_arity(self.__ptr__)
+
+    def __call__(self, *params):
+        &#34;&#34;&#34;
+        Calls this function with the given parameters
+
+        Parameters can either be a `Val` or a native python value which can be
+        converted to a `Val` of the corresponding correct type
+
+        Returns `None` if this func has 0 return types
+        Returns a single value if the func has 1 return type
+        Returns a list if the func has more than 1 return type
+
+        Note that you can also use the `__call__` method and invoke a `Func` as
+        if it were a function directly.
+        &#34;&#34;&#34;
+
+        ty = self.type
+        param_tys = ty.params
+        params_ptr = (wasm_val_t * len(params))()
+        for i, param in enumerate(params):
+            if i &gt;= len(param_tys):
+                raise WasmtimeError(&#34;too many parameters provided&#34;)
+            val = Val.__convert__(param_tys[i], param)
+            params_ptr[i] = val.__raw__
+
+        result_tys = ty.results
+        results_ptr = (wasm_val_t * len(result_tys))()
+
+        trap = P_wasm_trap_t()
+        error = dll.wasmtime_func_call(
+            self.__ptr__,
+            params_ptr,
+            len(params),
+            results_ptr,
+            len(result_tys),
+            byref(trap))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+        if trap:
+            raise Trap.__from_ptr__(trap)
+
+        results = []
+        for i in range(0, len(result_tys)):
+            results.append(extract_val(Val(results_ptr[i])))
+        if len(results) == 0:
+            return None
+        elif len(results) == 1:
+            return results[0]
+        else:
+            return results
+
+    def _as_extern(self):
+        return dll.wasm_func_as_extern(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_func_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Func.param_arity"><code class="name">var <span class="ident">param_arity</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the number of parameters this function expects</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def param_arity(self):
+    &#34;&#34;&#34;
+    Returns the number of parameters this function expects
+    &#34;&#34;&#34;
+    return dll.wasm_func_param_arity(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Func.result_arity"><code class="name">var <span class="ident">result_arity</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the number of results this function produces</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def result_arity(self):
+    &#34;&#34;&#34;
+    Returns the number of results this function produces
+    &#34;&#34;&#34;
+    return dll.wasm_func_result_arity(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Func.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Gets the type of this func as a <code><a title="wasmtime.FuncType" href="#wasmtime.FuncType">FuncType</a></code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Gets the type of this func as a `FuncType`
+    &#34;&#34;&#34;
+    ptr = dll.wasm_func_type(self.__ptr__)
+    return FuncType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.FuncType"><code class="flex name class">
+<span>class <span class="ident">FuncType</span></span>
+<span>(</span><span>params, results)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class FuncType(object):
+    def __init__(self, params, results):
+        for param in params:
+            if not isinstance(param, ValType):
+                raise TypeError(&#34;expected ValType&#34;)
+        for result in results:
+            if not isinstance(result, ValType):
+                raise TypeError(&#34;expected ValType&#34;)
+
+        params_ffi = wasm_valtype_vec_t()
+        dll.wasm_valtype_vec_new_uninitialized(byref(params_ffi), len(params))
+
+        results_ffi = wasm_valtype_vec_t()
+        for i, param in enumerate(params):
+            params_ffi.data[i] = take_owned_valtype(param)
+
+        dll.wasm_valtype_vec_new_uninitialized(
+            byref(results_ffi), len(results))
+        for i, result in enumerate(results):
+            results_ffi.data[i] = take_owned_valtype(result)
+        ptr = dll.wasm_functype_new(byref(params_ffi), byref(results_ffi))
+        if not ptr:
+            raise WasmtimeError(&#34;failed to allocate FuncType&#34;)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_functype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def params(self):
+        &#34;&#34;&#34;
+        Returns the list of parameter types for this function type
+        &#34;&#34;&#34;
+
+        ptr = dll.wasm_functype_params(self.__ptr__)
+        return ValType.__from_list__(ptr, self)
+
+    @property
+    def results(self):
+        &#34;&#34;&#34;
+        Returns the list of result types for this function type
+        &#34;&#34;&#34;
+
+        ptr = dll.wasm_functype_results(self.__ptr__)
+        return ValType.__from_list__(ptr, self)
+
+    def _as_extern(self):
+        return dll.wasm_functype_as_externtype_const(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_functype_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.FuncType.params"><code class="name">var <span class="ident">params</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the list of parameter types for this function type</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def params(self):
+    &#34;&#34;&#34;
+    Returns the list of parameter types for this function type
+    &#34;&#34;&#34;
+
+    ptr = dll.wasm_functype_params(self.__ptr__)
+    return ValType.__from_list__(ptr, self)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.FuncType.results"><code class="name">var <span class="ident">results</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the list of result types for this function type</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def results(self):
+    &#34;&#34;&#34;
+    Returns the list of result types for this function type
+    &#34;&#34;&#34;
+
+    ptr = dll.wasm_functype_results(self.__ptr__)
+    return ValType.__from_list__(ptr, self)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Global"><code class="flex name class">
+<span>class <span class="ident">Global</span></span>
+<span>(</span><span>store, ty, val)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Global(object):
+    def __init__(self, store, ty, val):
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+        if not isinstance(ty, GlobalType):
+            raise TypeError(&#34;expected a GlobalType&#34;)
+        val = Val.__convert__(ty.content, val)
+        ptr = P_wasm_global_t()
+        error = dll.wasmtime_global_new(
+            store.__ptr__,
+            ty.__ptr__,
+            byref(val.__raw__),
+            byref(ptr))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_global_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Gets the type of this global as a `GlobalType`
+        &#34;&#34;&#34;
+
+        ptr = dll.wasm_global_type(self.__ptr__)
+        return GlobalType.__from_ptr__(ptr, None)
+
+    @property
+    def value(self):
+        &#34;&#34;&#34;
+        Gets the current value of this global
+
+        Returns a native python type
+        &#34;&#34;&#34;
+        raw = wasm_val_t()
+        dll.wasm_global_get(self.__ptr__, byref(raw))
+        return Val(raw).value
+
+    @value.setter
+    def value(self, val):
+        &#34;&#34;&#34;
+        Sets the value of this global to a new value
+        &#34;&#34;&#34;
+        val = Val.__convert__(self.type.content, val)
+        error = dll.wasmtime_global_set(self.__ptr__, byref(val.__raw__))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    def _as_extern(self):
+        return dll.wasm_global_as_extern(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_global_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Global.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Gets the type of this global as a <code><a title="wasmtime.GlobalType" href="#wasmtime.GlobalType">GlobalType</a></code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Gets the type of this global as a `GlobalType`
+    &#34;&#34;&#34;
+
+    ptr = dll.wasm_global_type(self.__ptr__)
+    return GlobalType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Global.value"><code class="name">var <span class="ident">value</span></code></dt>
+<dd>
+<div class="desc"><p>Gets the current value of this global</p>
+<p>Returns a native python type</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def value(self):
+    &#34;&#34;&#34;
+    Gets the current value of this global
+
+    Returns a native python type
+    &#34;&#34;&#34;
+    raw = wasm_val_t()
+    dll.wasm_global_get(self.__ptr__, byref(raw))
+    return Val(raw).value</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.GlobalType"><code class="flex name class">
+<span>class <span class="ident">GlobalType</span></span>
+<span>(</span><span>valtype, mutable)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GlobalType(object):
+    def __init__(self, valtype, mutable):
+        if mutable:
+            mutability = WASM_VAR
+        else:
+            mutability = WASM_CONST
+        type_ptr = take_owned_valtype(valtype)
+        ptr = dll.wasm_globaltype_new(type_ptr, mutability)
+        if ptr == 0:
+            raise WasmtimeError(&#34;failed to allocate GlobalType&#34;)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_globaltype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def content(self):
+        &#34;&#34;&#34;
+        Returns the type this global contains
+        &#34;&#34;&#34;
+
+        ptr = dll.wasm_globaltype_content(self.__ptr__)
+        return ValType.__from_ptr__(ptr, self)
+
+    @property
+    def mutable(self):
+        &#34;&#34;&#34;
+        Returns whether this global is mutable or not
+        &#34;&#34;&#34;
+        val = dll.wasm_globaltype_mutability(self.__ptr__)
+        return val == WASM_VAR.value
+
+    def _as_extern(self):
+        return dll.wasm_globaltype_as_externtype_const(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_globaltype_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.GlobalType.content"><code class="name">var <span class="ident">content</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the type this global contains</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def content(self):
+    &#34;&#34;&#34;
+    Returns the type this global contains
+    &#34;&#34;&#34;
+
+    ptr = dll.wasm_globaltype_content(self.__ptr__)
+    return ValType.__from_ptr__(ptr, self)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.GlobalType.mutable"><code class="name">var <span class="ident">mutable</span></code></dt>
+<dd>
+<div class="desc"><p>Returns whether this global is mutable or not</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def mutable(self):
+    &#34;&#34;&#34;
+    Returns whether this global is mutable or not
+    &#34;&#34;&#34;
+    val = dll.wasm_globaltype_mutability(self.__ptr__)
+    return val == WASM_VAR.value</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.ImportType"><code class="flex name class">
+<span>class <span class="ident">ImportType</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ImportType(object):
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_importtype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def module(self):
+        &#34;&#34;&#34;
+        Returns the module this import type refers to
+        &#34;&#34;&#34;
+
+        return dll.wasm_importtype_module(self.__ptr__).contents.to_str()
+
+    @property
+    def name(self):
+        &#34;&#34;&#34;
+        Returns the name in the modulethis import type refers to
+        &#34;&#34;&#34;
+        return dll.wasm_importtype_name(self.__ptr__).contents.to_str()
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Returns the type that this import refers to
+        &#34;&#34;&#34;
+        ptr = dll.wasm_importtype_type(self.__ptr__)
+        return wrap_externtype(ptr, self.__owner__ or self)
+
+    def __del__(self):
+        if self.__owner__ is None:
+            dll.wasm_importtype_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.ImportType.module"><code class="name">var <span class="ident">module</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the module this import type refers to</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def module(self):
+    &#34;&#34;&#34;
+    Returns the module this import type refers to
+    &#34;&#34;&#34;
+
+    return dll.wasm_importtype_module(self.__ptr__).contents.to_str()</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ImportType.name"><code class="name">var <span class="ident">name</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the name in the modulethis import type refers to</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def name(self):
+    &#34;&#34;&#34;
+    Returns the name in the modulethis import type refers to
+    &#34;&#34;&#34;
+    return dll.wasm_importtype_name(self.__ptr__).contents.to_str()</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ImportType.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the type that this import refers to</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Returns the type that this import refers to
+    &#34;&#34;&#34;
+    ptr = dll.wasm_importtype_type(self.__ptr__)
+    return wrap_externtype(ptr, self.__owner__ or self)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Instance"><code class="flex name class">
+<span>class <span class="ident">Instance</span></span>
+<span>(</span><span>module, imports)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a new instance by instantiating the <code>module</code> given with the
+<code>imports</code> provided.</p>
+<p>The <code>module</code> must have type <code><a title="wasmtime.Module" href="#wasmtime.Module">Module</a></code>, and the <code>imports</code> must be an
+iterable of external values, either <code>Extern</code>, <code><a title="wasmtime.Func" href="#wasmtime.Func">Func</a></code>, <code><a title="wasmtime.Table" href="#wasmtime.Table">Table</a></code>, <code><a title="wasmtime.Memory" href="#wasmtime.Memory">Memory</a></code>,
+or <code><a title="wasmtime.Global" href="#wasmtime.Global">Global</a></code>.</p>
+<p>Raises an error if instantiation fails (e.g. linking or trap) and
+otherwise initializes the new instance.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Instance(object):
+    def __init__(self, module, imports):
+        &#34;&#34;&#34;
+        Creates a new instance by instantiating the `module` given with the
+        `imports` provided.
+
+        The `module` must have type `Module`, and the `imports` must be an
+        iterable of external values, either `Extern`, `Func`, `Table`, `Memory`,
+        or `Global`.
+
+        Raises an error if instantiation fails (e.g. linking or trap) and
+        otherwise initializes the new instance.
+        &#34;&#34;&#34;
+
+        if not isinstance(module, Module):
+            raise TypeError(&#34;expected a Module&#34;)
+
+        imports_ptr = (P_wasm_extern_t * len(imports))()
+        for i, val in enumerate(imports):
+            imports_ptr[i] = get_extern_ptr(val)
+
+        instance = P_wasm_instance_t()
+        trap = P_wasm_trap_t()
+        error = dll.wasmtime_instance_new(
+            module.__ptr__,
+            imports_ptr,
+            len(imports),
+            byref(instance),
+            byref(trap))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+        if trap:
+            raise Trap.__from_ptr__(trap)
+        self.__ptr__ = instance
+        self._module = module
+        self._exports = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, module):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_instance_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty._module = module
+        ty._exports = None
+        return ty
+
+    @property
+    def exports(self):
+        &#34;&#34;&#34;
+        Returns the exports of this module
+
+        The returned type can be indexed both with integers and with strings for
+        names of exports.
+        &#34;&#34;&#34;
+        if self._exports is None:
+            externs = ExternTypeList()
+            dll.wasm_instance_exports(self.__ptr__, byref(externs.vec))
+            extern_list = []
+            for i in range(0, externs.vec.size):
+                extern_list.append(wrap_extern(externs.vec.data[i], externs))
+            self._exports = InstanceExports(extern_list, self._module)
+        return self._exports
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasm_instance_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Instance.exports"><code class="name">var <span class="ident">exports</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the exports of this module</p>
+<p>The returned type can be indexed both with integers and with strings for
+names of exports.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def exports(self):
+    &#34;&#34;&#34;
+    Returns the exports of this module
+
+    The returned type can be indexed both with integers and with strings for
+    names of exports.
+    &#34;&#34;&#34;
+    if self._exports is None:
+        externs = ExternTypeList()
+        dll.wasm_instance_exports(self.__ptr__, byref(externs.vec))
+        extern_list = []
+        for i in range(0, externs.vec.size):
+            extern_list.append(wrap_extern(externs.vec.data[i], externs))
+        self._exports = InstanceExports(extern_list, self._module)
+    return self._exports</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Limits"><code class="flex name class">
+<span>class <span class="ident">Limits</span></span>
+<span>(</span><span>min, max)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Limits(object):
+    def __init__(self, min, max):
+        self.min = min
+        self.max = max
+
+    def __ffi__(self):
+        max = self.max
+        if max is None:
+            max = 0xffffffff
+        return wasm_limits_t(self.min, max)
+
+    def __eq__(self, other):
+        return self.min == other.min and self.max == other.max
+
+    @classmethod
+    def __from_ffi__(cls, val):
+        min = val.contents.min
+        max = val.contents.max
+        if max == 0xffffffff:
+            max = None
+        return Limits(min, max)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Linker"><code class="flex name class">
+<span>class <span class="ident">Linker</span></span>
+<span>(</span><span>store)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Linker(object):
+    def __init__(self, store):
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+        self.__ptr__ = dll.wasmtime_linker_new(store.__ptr__)
+        self.store = store
+
+    @setter_property
+    def allow_shadowing(self, allow):
+        &#34;&#34;&#34;
+        Configures whether definitions are allowed to shadow one another within
+        this linker
+        &#34;&#34;&#34;
+        if not isinstance(allow, bool):
+            raise TypeError(&#34;expected a boolean&#34;)
+        dll.wasmtime_linker_allow_shadowing(self.__ptr__, allow)
+
+    def define(self, module, name, item):
+        raw_item = get_extern_ptr(item)
+        module_raw = str_to_name(module)
+        name_raw = str_to_name(name)
+        error = dll.wasmtime_linker_define(
+            self.__ptr__,
+            byref(module_raw),
+            byref(name_raw),
+            raw_item)
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    def define_instance(self, name, instance):
+        if not isinstance(instance, Instance):
+            raise TypeError(&#34;expected an `Instance`&#34;)
+        name_raw = str_to_name(name)
+        error = dll.wasmtime_linker_define_instance(self.__ptr__, byref(name_raw),
+                                                    instance.__ptr__)
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    def define_wasi(self, instance):
+        if not isinstance(instance, WasiInstance):
+            raise TypeError(&#34;expected an `WasiInstance`&#34;)
+        error = dll.wasmtime_linker_define_wasi(self.__ptr__, instance.__ptr__)
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    def instantiate(self, module):
+        if not isinstance(module, Module):
+            raise TypeError(&#34;expected a `Module`&#34;)
+        trap = P_wasm_trap_t()
+        instance = P_wasm_instance_t()
+        error = dll.wasmtime_linker_instantiate(
+            self.__ptr__, module.__ptr__, byref(instance), byref(trap))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+        if trap:
+            raise Trap.__from_ptr__(trap)
+        return Instance.__from_ptr__(instance, module)
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasmtime_linker_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Linker.allow_shadowing"><code class="name">var <span class="ident">allow_shadowing</span></code></dt>
+<dd>
+<div class="desc"><p>Configures whether definitions are allowed to shadow one another within
+this linker</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.Linker.define"><code class="name flex">
+<span>def <span class="ident">define</span></span>(<span>self, module, name, item)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def define(self, module, name, item):
+    raw_item = get_extern_ptr(item)
+    module_raw = str_to_name(module)
+    name_raw = str_to_name(name)
+    error = dll.wasmtime_linker_define(
+        self.__ptr__,
+        byref(module_raw),
+        byref(name_raw),
+        raw_item)
+    if error:
+        raise WasmtimeError.__from_ptr__(error)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Linker.define_instance"><code class="name flex">
+<span>def <span class="ident">define_instance</span></span>(<span>self, name, instance)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def define_instance(self, name, instance):
+    if not isinstance(instance, Instance):
+        raise TypeError(&#34;expected an `Instance`&#34;)
+    name_raw = str_to_name(name)
+    error = dll.wasmtime_linker_define_instance(self.__ptr__, byref(name_raw),
+                                                instance.__ptr__)
+    if error:
+        raise WasmtimeError.__from_ptr__(error)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Linker.define_wasi"><code class="name flex">
+<span>def <span class="ident">define_wasi</span></span>(<span>self, instance)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def define_wasi(self, instance):
+    if not isinstance(instance, WasiInstance):
+        raise TypeError(&#34;expected an `WasiInstance`&#34;)
+    error = dll.wasmtime_linker_define_wasi(self.__ptr__, instance.__ptr__)
+    if error:
+        raise WasmtimeError.__from_ptr__(error)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Linker.instantiate"><code class="name flex">
+<span>def <span class="ident">instantiate</span></span>(<span>self, module)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def instantiate(self, module):
+    if not isinstance(module, Module):
+        raise TypeError(&#34;expected a `Module`&#34;)
+    trap = P_wasm_trap_t()
+    instance = P_wasm_instance_t()
+    error = dll.wasmtime_linker_instantiate(
+        self.__ptr__, module.__ptr__, byref(instance), byref(trap))
+    if error:
+        raise WasmtimeError.__from_ptr__(error)
+    if trap:
+        raise Trap.__from_ptr__(trap)
+    return Instance.__from_ptr__(instance, module)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Memory"><code class="flex name class">
+<span>class <span class="ident">Memory</span></span>
+<span>(</span><span>store, ty)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a new memory in <code>store</code> with the given <code>ty</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Memory(object):
+    def __init__(self, store, ty):
+        &#34;&#34;&#34;
+        Creates a new memory in `store` with the given `ty`
+        &#34;&#34;&#34;
+
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+        if not isinstance(ty, MemoryType):
+            raise TypeError(&#34;expected a MemoryType&#34;)
+        ptr = dll.wasm_memory_new(store.__ptr__, ty.__ptr__)
+        if not ptr:
+            raise WasmtimeError(&#34;failed to create memory&#34;)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_memory_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Gets the type of this memory as a `MemoryType`
+        &#34;&#34;&#34;
+
+        ptr = dll.wasm_memory_type(self.__ptr__)
+        return MemoryType.__from_ptr__(ptr, None)
+
+    def grow(self, delta):
+        &#34;&#34;&#34;
+        Grows this memory by the given number of pages
+        &#34;&#34;&#34;
+
+        if not isinstance(delta, int):
+            raise TypeError(&#34;expected an integer&#34;)
+        if delta &lt; 0:
+            raise WasmtimeError(&#34;cannot grow by negative amount&#34;)
+        ok = dll.wasm_memory_grow(self.__ptr__, delta)
+        if ok:
+            return True
+        else:
+            return False
+
+    @property
+    def size(self):
+        &#34;&#34;&#34;
+        Returns the size, in WebAssembly pages, of this memory.
+        &#34;&#34;&#34;
+
+        return dll.wasm_memory_size(self.__ptr__)
+
+    @property
+    def data_ptr(self):
+        &#34;&#34;&#34;
+        Returns the raw pointer in memory where this wasm memory lives.
+
+        Remember that all accesses to wasm memory should be bounds-checked
+        against the `data_len` method.
+        &#34;&#34;&#34;
+        return dll.wasm_memory_data(self.__ptr__)
+
+    @property
+    def data_len(self):
+        &#34;&#34;&#34;
+        Returns the raw byte length of this memory.
+        &#34;&#34;&#34;
+
+        return dll.wasm_memory_data_size(self.__ptr__)
+
+    def _as_extern(self):
+        return dll.wasm_memory_as_extern(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_memory_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Memory.data_len"><code class="name">var <span class="ident">data_len</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the raw byte length of this memory.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def data_len(self):
+    &#34;&#34;&#34;
+    Returns the raw byte length of this memory.
+    &#34;&#34;&#34;
+
+    return dll.wasm_memory_data_size(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Memory.data_ptr"><code class="name">var <span class="ident">data_ptr</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the raw pointer in memory where this wasm memory lives.</p>
+<p>Remember that all accesses to wasm memory should be bounds-checked
+against the <code>data_len</code> method.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def data_ptr(self):
+    &#34;&#34;&#34;
+    Returns the raw pointer in memory where this wasm memory lives.
+
+    Remember that all accesses to wasm memory should be bounds-checked
+    against the `data_len` method.
+    &#34;&#34;&#34;
+    return dll.wasm_memory_data(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Memory.size"><code class="name">var <span class="ident">size</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the size, in WebAssembly pages, of this memory.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def size(self):
+    &#34;&#34;&#34;
+    Returns the size, in WebAssembly pages, of this memory.
+    &#34;&#34;&#34;
+
+    return dll.wasm_memory_size(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Memory.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Gets the type of this memory as a <code><a title="wasmtime.MemoryType" href="#wasmtime.MemoryType">MemoryType</a></code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Gets the type of this memory as a `MemoryType`
+    &#34;&#34;&#34;
+
+    ptr = dll.wasm_memory_type(self.__ptr__)
+    return MemoryType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.Memory.grow"><code class="name flex">
+<span>def <span class="ident">grow</span></span>(<span>self, delta)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Grows this memory by the given number of pages</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def grow(self, delta):
+    &#34;&#34;&#34;
+    Grows this memory by the given number of pages
+    &#34;&#34;&#34;
+
+    if not isinstance(delta, int):
+        raise TypeError(&#34;expected an integer&#34;)
+    if delta &lt; 0:
+        raise WasmtimeError(&#34;cannot grow by negative amount&#34;)
+    ok = dll.wasm_memory_grow(self.__ptr__, delta)
+    if ok:
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.MemoryType"><code class="flex name class">
+<span>class <span class="ident">MemoryType</span></span>
+<span>(</span><span>limits)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MemoryType(object):
+    def __init__(self, limits):
+        if not isinstance(limits, Limits):
+            raise TypeError(&#34;expected Limits&#34;)
+        ptr = dll.wasm_memorytype_new(byref(limits.__ffi__()))
+        if not ptr:
+            raise WasmtimeError(&#34;failed to allocate MemoryType&#34;)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_memorytype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def limits(self):
+        &#34;&#34;&#34;
+        Returns the limits on the size of this table
+        &#34;&#34;&#34;
+        val = dll.wasm_memorytype_limits(self.__ptr__)
+        return Limits.__from_ffi__(val)
+
+    def _as_extern(self):
+        return dll.wasm_memorytype_as_externtype_const(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_memorytype_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.MemoryType.limits"><code class="name">var <span class="ident">limits</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the limits on the size of this table</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def limits(self):
+    &#34;&#34;&#34;
+    Returns the limits on the size of this table
+    &#34;&#34;&#34;
+    val = dll.wasm_memorytype_limits(self.__ptr__)
+    return Limits.__from_ffi__(val)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Module"><code class="flex name class">
+<span>class <span class="ident">Module</span></span>
+<span>(</span><span>store, wasm)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Module(object):
+    @classmethod
+    def from_file(cls, store, path):
+        &#34;&#34;&#34;
+        Compiles and creates a new `Module` by reading the file at `path` and
+        then delegating to the `Module` constructor.
+        &#34;&#34;&#34;
+
+        with open(path, &#34;rb&#34;) as f:
+            contents = f.read()
+        return cls(store, contents)
+
+    def __init__(self, store, wasm):
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+
+        # If this looks like a string, parse it as the text format. Note that
+        # in python 2 strings and bytes are basically the same, so we skip this
+        # if the first byte in the string is 0, meaning this is actually a wasm
+        # module.
+        if isinstance(wasm, str) and len(wasm) &gt; 0 and ord(wasm[0]) != 0:
+            wasm = wat2wasm(wasm)
+        if isinstance(wasm, bytes) and len(wasm) &gt; 0 and wasm[0] != 0:
+            wasm = wat2wasm(wasm)
+
+        if not isinstance(wasm, (bytes, bytearray)):
+            raise TypeError(&#34;expected wasm bytes&#34;)
+
+        # TODO: can the copy be avoided here? I can&#39;t for the life of me
+        # figure this out.
+        c_ty = c_uint8 * len(wasm)
+        binary = wasm_byte_vec_t(len(wasm), c_ty.from_buffer_copy(wasm))
+        ptr = P_wasm_module_t()
+        error = dll.wasmtime_module_new(store.__ptr__, byref(binary), byref(ptr))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+        self.__ptr__ = ptr
+        self.store = store
+
+    @classmethod
+    def validate(cls, store, wasm):
+        &#34;&#34;&#34;
+        Validates whether the list of bytes `wasm` provided is a valid
+        WebAssembly binary given the configuration in `store`
+
+        Raises a `WasmtimeError` if the wasm isn&#39;t valid.
+        &#34;&#34;&#34;
+
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+        if not isinstance(wasm, (bytes, bytearray)):
+            raise TypeError(&#34;expected wasm bytes&#34;)
+
+        # TODO: can the copy be avoided here? I can&#39;t for the life of me
+        # figure this out.
+        c_ty = c_uint8 * len(wasm)
+        binary = wasm_byte_vec_t(len(wasm), c_ty.from_buffer_copy(wasm))
+        error = dll.wasmtime_module_validate(store.__ptr__, byref(binary))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    @property
+    def imports(self):
+        &#34;&#34;&#34;
+        Returns the types of imports that this module has
+        &#34;&#34;&#34;
+
+        imports = ImportTypeList()
+        dll.wasm_module_imports(self.__ptr__, byref(imports.vec))
+        ret = []
+        for i in range(0, imports.vec.size):
+            ret.append(ImportType.__from_ptr__(imports.vec.data[i], imports))
+        return ret
+
+    @property
+    def exports(self):
+        &#34;&#34;&#34;
+        Returns the types of the exports that this module has
+        &#34;&#34;&#34;
+
+        exports = ExportTypeList()
+        dll.wasm_module_exports(self.__ptr__, byref(exports.vec))
+        ret = []
+        for i in range(0, exports.vec.size):
+            ret.append(ExportType.__from_ptr__(exports.vec.data[i], exports))
+        return ret
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasm_module_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="wasmtime.Module.from_file"><code class="name flex">
+<span>def <span class="ident">from_file</span></span>(<span>store, path)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Compiles and creates a new <code><a title="wasmtime.Module" href="#wasmtime.Module">Module</a></code> by reading the file at <code>path</code> and
+then delegating to the <code><a title="wasmtime.Module" href="#wasmtime.Module">Module</a></code> constructor.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def from_file(cls, store, path):
+    &#34;&#34;&#34;
+    Compiles and creates a new `Module` by reading the file at `path` and
+    then delegating to the `Module` constructor.
+    &#34;&#34;&#34;
+
+    with open(path, &#34;rb&#34;) as f:
+        contents = f.read()
+    return cls(store, contents)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Module.validate"><code class="name flex">
+<span>def <span class="ident">validate</span></span>(<span>store, wasm)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Validates whether the list of bytes <code>wasm</code> provided is a valid
+WebAssembly binary given the configuration in <code>store</code></p>
+<p>Raises a <code><a title="wasmtime.WasmtimeError" href="#wasmtime.WasmtimeError">WasmtimeError</a></code> if the wasm isn't valid.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def validate(cls, store, wasm):
+    &#34;&#34;&#34;
+    Validates whether the list of bytes `wasm` provided is a valid
+    WebAssembly binary given the configuration in `store`
+
+    Raises a `WasmtimeError` if the wasm isn&#39;t valid.
+    &#34;&#34;&#34;
+
+    if not isinstance(store, Store):
+        raise TypeError(&#34;expected a Store&#34;)
+    if not isinstance(wasm, (bytes, bytearray)):
+        raise TypeError(&#34;expected wasm bytes&#34;)
+
+    # TODO: can the copy be avoided here? I can&#39;t for the life of me
+    # figure this out.
+    c_ty = c_uint8 * len(wasm)
+    binary = wasm_byte_vec_t(len(wasm), c_ty.from_buffer_copy(wasm))
+    error = dll.wasmtime_module_validate(store.__ptr__, byref(binary))
+    if error:
+        raise WasmtimeError.__from_ptr__(error)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Module.exports"><code class="name">var <span class="ident">exports</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the types of the exports that this module has</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def exports(self):
+    &#34;&#34;&#34;
+    Returns the types of the exports that this module has
+    &#34;&#34;&#34;
+
+    exports = ExportTypeList()
+    dll.wasm_module_exports(self.__ptr__, byref(exports.vec))
+    ret = []
+    for i in range(0, exports.vec.size):
+        ret.append(ExportType.__from_ptr__(exports.vec.data[i], exports))
+    return ret</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Module.imports"><code class="name">var <span class="ident">imports</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the types of imports that this module has</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def imports(self):
+    &#34;&#34;&#34;
+    Returns the types of imports that this module has
+    &#34;&#34;&#34;
+
+    imports = ImportTypeList()
+    dll.wasm_module_imports(self.__ptr__, byref(imports.vec))
+    ret = []
+    for i in range(0, imports.vec.size):
+        ret.append(ImportType.__from_ptr__(imports.vec.data[i], imports))
+    return ret</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Store"><code class="flex name class">
+<span>class <span class="ident">Store</span></span>
+<span>(</span><span>engine=None)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Store(object):
+    def __init__(self, engine=None):
+        if engine is None:
+            engine = Engine()
+        elif not isinstance(engine, Engine):
+            raise TypeError(&#34;expected an Engine&#34;)
+        self.__ptr__ = dll.wasm_store_new(engine.__ptr__)
+        self.engine = engine
+
+    def interrupt_handle(self):
+        &#34;&#34;&#34;
+        Creates a new interrupt handle through which execution of wasm can be
+        interrupted.
+
+        Raises a `WasmtimeError` if this store&#39;s configuration has not been
+        configured to enable interruption.
+
+        For more information about this be sure to consult the Rust documentation:
+        https://bytecodealliance.github.io/wasmtime/api/wasmtime/struct.Store.html#method.interrupt_handle
+        &#34;&#34;&#34;
+
+        return InterruptHandle(self)
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasm_store_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.Store.interrupt_handle"><code class="name flex">
+<span>def <span class="ident">interrupt_handle</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a new interrupt handle through which execution of wasm can be
+interrupted.</p>
+<p>Raises a <code><a title="wasmtime.WasmtimeError" href="#wasmtime.WasmtimeError">WasmtimeError</a></code> if this store's configuration has not been
+configured to enable interruption.</p>
+<p>For more information about this be sure to consult the Rust documentation:
+<a href="https://bytecodealliance.github.io/wasmtime/api/wasmtime/struct.Store.html#method.interrupt_handle">https://bytecodealliance.github.io/wasmtime/api/wasmtime/struct.Store.html#method.interrupt_handle</a></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interrupt_handle(self):
+    &#34;&#34;&#34;
+    Creates a new interrupt handle through which execution of wasm can be
+    interrupted.
+
+    Raises a `WasmtimeError` if this store&#39;s configuration has not been
+    configured to enable interruption.
+
+    For more information about this be sure to consult the Rust documentation:
+    https://bytecodealliance.github.io/wasmtime/api/wasmtime/struct.Store.html#method.interrupt_handle
+    &#34;&#34;&#34;
+
+    return InterruptHandle(self)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Table"><code class="flex name class">
+<span>class <span class="ident">Table</span></span>
+<span>(</span><span>store, ty, init)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Creates a new table within <code>store</code> with the specified <code>ty</code>.</p>
+<p>Note that for now only funcref tables are supported and <code>init</code> must
+either be <code>None</code> or a <code><a title="wasmtime.Func" href="#wasmtime.Func">Func</a></code>.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Table(object):
+    def __init__(self, store, ty, init):
+        &#34;&#34;&#34;
+        Creates a new table within `store` with the specified `ty`.
+
+        Note that for now only funcref tables are supported and `init` must
+        either be `None` or a `Func`.
+        &#34;&#34;&#34;
+
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a `Store`&#34;)
+        if not isinstance(ty, TableType):
+            raise TypeError(&#34;expected a `TableType`&#34;)
+
+        init_ptr = get_func_ptr(init)
+        ptr = P_wasm_table_t()
+        error = dll.wasmtime_funcref_table_new(store.__ptr__, ty.__ptr__, init_ptr, byref(ptr))
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_table_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Gets the type of this table as a `TableType`
+        &#34;&#34;&#34;
+
+        ptr = dll.wasm_table_type(self.__ptr__)
+        return TableType.__from_ptr__(ptr, None)
+
+    @property
+    def size(self):
+        &#34;&#34;&#34;
+        Gets the size, in elements, of this table
+        &#34;&#34;&#34;
+
+        return dll.wasm_table_size(self.__ptr__)
+
+    def grow(self, amt, init):
+        &#34;&#34;&#34;
+        Grows this table by the specified number of slots, using the specified
+        initializer for all new table slots.
+
+        Raises a `WasmtimeError` if the table could not be grown.
+        Returns the previous size of the table otherwise.
+        &#34;&#34;&#34;
+        init_ptr = get_func_ptr(init)
+
+        prev = c_uint32(0)
+        error = dll.wasmtime_funcref_table_grow(self.__ptr__, c_uint32(amt), init_ptr, byref(prev))
+        if error:
+            raise WasmtimeError(&#34;failed to grow table&#34;)
+        return prev.value
+
+    def __getitem__(self, idx):
+        &#34;&#34;&#34;
+        Gets an individual element within this table. Currently only works on
+        `funcref` tables.
+
+        Returns `None` for a slot where no function has been placed into.
+        Returns `Func` for a slot with a function.
+        Raises an `WasmtimeError` if `idx` is out of bounds.
+        &#34;&#34;&#34;
+
+        idx = c_uint32(idx)
+        ptr = P_wasm_func_t()
+        ok = dll.wasmtime_funcref_table_get(self.__ptr__, idx, byref(ptr))
+        if ok:
+            if ptr:
+                return Func.__from_ptr__(ptr, None)
+            return None
+        raise WasmtimeError(&#34;table index out of bounds&#34;)
+
+    def __setitem__(self, idx, val):
+        &#34;&#34;&#34;
+        Sets an individual element within this table. Currently only works on
+        `funcref` tables.
+
+        The `val` specified must either be a `Func` or `None`, and `idx` must
+        be an integer index.
+
+        Raises a `WasmtimeError` if `idx` is out of bounds.
+        &#34;&#34;&#34;
+
+        idx = c_uint32(idx)
+        val_ptr = get_func_ptr(val)
+        error = dll.wasmtime_funcref_table_set(self.__ptr__, idx, val_ptr)
+        if error:
+            raise WasmtimeError.__from_ptr__(error)
+
+    def _as_extern(self):
+        return dll.wasm_table_as_extern(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_table_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Table.size"><code class="name">var <span class="ident">size</span></code></dt>
+<dd>
+<div class="desc"><p>Gets the size, in elements, of this table</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def size(self):
+    &#34;&#34;&#34;
+    Gets the size, in elements, of this table
+    &#34;&#34;&#34;
+
+    return dll.wasm_table_size(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Table.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Gets the type of this table as a <code><a title="wasmtime.TableType" href="#wasmtime.TableType">TableType</a></code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Gets the type of this table as a `TableType`
+    &#34;&#34;&#34;
+
+    ptr = dll.wasm_table_type(self.__ptr__)
+    return TableType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.Table.grow"><code class="name flex">
+<span>def <span class="ident">grow</span></span>(<span>self, amt, init)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Grows this table by the specified number of slots, using the specified
+initializer for all new table slots.</p>
+<p>Raises a <code><a title="wasmtime.WasmtimeError" href="#wasmtime.WasmtimeError">WasmtimeError</a></code> if the table could not be grown.
+Returns the previous size of the table otherwise.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def grow(self, amt, init):
+    &#34;&#34;&#34;
+    Grows this table by the specified number of slots, using the specified
+    initializer for all new table slots.
+
+    Raises a `WasmtimeError` if the table could not be grown.
+    Returns the previous size of the table otherwise.
+    &#34;&#34;&#34;
+    init_ptr = get_func_ptr(init)
+
+    prev = c_uint32(0)
+    error = dll.wasmtime_funcref_table_grow(self.__ptr__, c_uint32(amt), init_ptr, byref(prev))
+    if error:
+        raise WasmtimeError(&#34;failed to grow table&#34;)
+    return prev.value</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.TableType"><code class="flex name class">
+<span>class <span class="ident">TableType</span></span>
+<span>(</span><span>valtype, limits)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TableType(object):
+    def __init__(self, valtype, limits):
+        if not isinstance(limits, Limits):
+            raise TypeError(&#34;expected Limits&#34;)
+        type_ptr = take_owned_valtype(valtype)
+        ptr = dll.wasm_tabletype_new(type_ptr, byref(limits.__ffi__()))
+        if not ptr:
+            raise WasmtimeError(&#34;failed to allocate TableType&#34;)
+        self.__ptr__ = ptr
+        self.__owner__ = None
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_tabletype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    @property
+    def element(self):
+        &#34;&#34;&#34;
+        Returns the type of this table&#39;s elements
+        &#34;&#34;&#34;
+        ptr = dll.wasm_tabletype_element(self.__ptr__)
+        return ValType.__from_ptr__(ptr, self)
+
+    @property
+    def limits(self):
+        &#34;&#34;&#34;
+        Returns the limits on the size of thi stable
+        &#34;&#34;&#34;
+        val = dll.wasm_tabletype_limits(self.__ptr__)
+        return Limits.__from_ffi__(val)
+
+    def _as_extern(self):
+        return dll.wasm_tabletype_as_externtype_const(self.__ptr__)
+
+    def __del__(self):
+        if hasattr(self, &#39;__owner__&#39;) and self.__owner__ is None:
+            dll.wasm_tabletype_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.TableType.element"><code class="name">var <span class="ident">element</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the type of this table's elements</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def element(self):
+    &#34;&#34;&#34;
+    Returns the type of this table&#39;s elements
+    &#34;&#34;&#34;
+    ptr = dll.wasm_tabletype_element(self.__ptr__)
+    return ValType.__from_ptr__(ptr, self)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.TableType.limits"><code class="name">var <span class="ident">limits</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the limits on the size of thi stable</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def limits(self):
+    &#34;&#34;&#34;
+    Returns the limits on the size of thi stable
+    &#34;&#34;&#34;
+    val = dll.wasm_tabletype_limits(self.__ptr__)
+    return Limits.__from_ffi__(val)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Trap"><code class="flex name class">
+<span>class <span class="ident">Trap</span></span>
+<span>(</span><span>store, message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p>
+<p>Creates a new trap in <code>store</code> with the given <code>message</code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Trap(Exception):
+    def __init__(self, store, message):
+        &#34;&#34;&#34;
+        Creates a new trap in `store` with the given `message`
+        &#34;&#34;&#34;
+
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a Store&#34;)
+        if not isinstance(message, str):
+            raise TypeError(&#34;expected a string&#34;)
+        message_raw = str_to_name(message, trailing_nul=True)
+        ptr = dll.wasm_trap_new(store.__ptr__, byref(message_raw))
+        if not ptr:
+            raise WasmtimeError(&#34;failed to create trap&#34;)
+        self.__ptr__ = ptr
+
+    @classmethod
+    def __from_ptr__(cls, ptr):
+        if not isinstance(ptr, P_wasm_trap_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        trap = cls.__new__(cls)
+        trap.__ptr__ = ptr
+        return trap
+
+    @property
+    def message(self):
+        &#34;&#34;&#34;
+        Returns the message for this trap
+        &#34;&#34;&#34;
+
+        message = wasm_byte_vec_t()
+        dll.wasm_trap_message(self.__ptr__, byref(message))
+        # subtract one to chop off the trailing nul byte
+        message.size -= 1
+        ret = message.to_str()
+        message.size += 1
+        dll.wasm_byte_vec_delete(byref(message))
+        return ret
+
+    @property
+    def frames(self):
+        frames = FrameList()
+        dll.wasm_trap_trace(self.__ptr__, byref(frames.vec))
+        ret = []
+        for i in range(0, frames.vec.size):
+            ret.append(Frame.__from_ptr__(frames.vec.data[i], frames))
+        return ret
+
+    def __str__(self):
+        frames = self.frames
+        message = self.message
+        if len(frames) &gt; 0:
+            message += &#34;\nwasm backtrace:\n&#34;
+            for i, frame in enumerate(frames):
+                module = frame.module_name or &#39;&lt;unknown&gt;&#39;
+                default_func_name = &#39;&lt;wasm function %d&gt;&#39; % frame.func_index
+                func = frame.func_name or default_func_name
+                message += &#34;  {}: {:#6x} - {}!{}\n&#34;.format(i, frame.module_offset, module, func)
+        return message
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasm_trap_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Trap.frames"><code class="name">var <span class="ident">frames</span></code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def frames(self):
+    frames = FrameList()
+    dll.wasm_trap_trace(self.__ptr__, byref(frames.vec))
+    ret = []
+    for i in range(0, frames.vec.size):
+        ret.append(Frame.__from_ptr__(frames.vec.data[i], frames))
+    return ret</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Trap.message"><code class="name">var <span class="ident">message</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the message for this trap</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def message(self):
+    &#34;&#34;&#34;
+    Returns the message for this trap
+    &#34;&#34;&#34;
+
+    message = wasm_byte_vec_t()
+    dll.wasm_trap_message(self.__ptr__, byref(message))
+    # subtract one to chop off the trailing nul byte
+    message.size -= 1
+    ret = message.to_str()
+    message.size += 1
+    dll.wasm_byte_vec_delete(byref(message))
+    return ret</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.Val"><code class="flex name class">
+<span>class <span class="ident">Val</span></span>
+<span>(</span><span>raw)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Val(object):
+    @classmethod
+    def i32(cls, val):
+        &#34;&#34;&#34;
+        Create a new 32-bit integer value
+        &#34;&#34;&#34;
+        if not is_integer(val):
+            raise TypeError(&#34;expected an integer&#34;)
+        ffi = wasm_val_t(WASM_I32)
+        ffi.of.i32 = val
+        return Val(ffi)
+
+    @classmethod
+    def i64(cls, val):
+        &#34;&#34;&#34;
+        Create a new 64-bit integer value
+        &#34;&#34;&#34;
+        if not is_integer(val):
+            raise TypeError(&#34;expected an integer&#34;)
+        ffi = wasm_val_t(WASM_I64)
+        ffi.of.i64 = val
+        return Val(ffi)
+
+    @classmethod
+    def f32(cls, val):
+        &#34;&#34;&#34;
+        Create a new 32-bit float value
+        &#34;&#34;&#34;
+        if not isinstance(val, float):
+            raise TypeError(&#34;expected a float&#34;)
+        ffi = wasm_val_t(WASM_F32)
+        ffi.of.f32 = val
+        return Val(ffi)
+
+    @classmethod
+    def f64(cls, val):
+        &#34;&#34;&#34;
+        Create a new 64-bit float value
+        &#34;&#34;&#34;
+        if not isinstance(val, float):
+            raise TypeError(&#34;expected a float&#34;)
+        ffi = wasm_val_t(WASM_F64)
+        ffi.of.f64 = val
+        return Val(ffi)
+
+    def __init__(self, raw):
+        if not isinstance(raw, wasm_val_t):
+            raise TypeError(&#34;expected a raw value&#34;)
+        self.__raw__ = raw
+
+    @classmethod
+    def __convert__(cls, ty, val):
+        if isinstance(val, Val):
+            if ty != val.type:
+                raise TypeError(&#34;wrong type of `Val` provided&#34;)
+            return val
+        if ty == ValType.i32():
+            return Val.i32(val)
+        if ty == ValType.i64():
+            return Val.i64(val)
+        if ty == ValType.f32():
+            return Val.f32(val)
+        if ty == ValType.f64():
+            return Val.f64(val)
+        raise WasmtimeError(&#34;don&#39;t know how to convert %r to %s&#34; % (val, ty))
+
+    @property
+    def value(self):
+        &#34;&#34;&#34;
+        Get the the underlying value as a python value
+
+        Returns `None` if the value can&#39;t be represented in Python
+        &#34;&#34;&#34;
+        if self.__raw__.kind == WASM_I32.value:
+            return self.__raw__.of.i32
+        if self.__raw__.kind == WASM_I64.value:
+            return self.__raw__.of.i64
+        if self.__raw__.kind == WASM_F32.value:
+            return self.__raw__.of.f32
+        if self.__raw__.kind == WASM_F64.value:
+            return self.__raw__.of.f64
+        return None
+
+    def as_i32(self):
+        &#34;&#34;&#34;
+        Get the 32-bit integer value of this value, or `None` if it&#39;s not an i32
+        &#34;&#34;&#34;
+        if self.__raw__.kind == WASM_I32.value:
+            return self.__raw__.of.i32
+        else:
+            return None
+
+    def as_i64(self):
+        &#34;&#34;&#34;
+        Get the 64-bit integer value of this value, or `None` if it&#39;s not an i64
+        &#34;&#34;&#34;
+        if self.__raw__.kind == WASM_I64.value:
+            return self.__raw__.of.i64
+        else:
+            return None
+
+    def as_f32(self):
+        &#34;&#34;&#34;
+        Get the 32-bit float value of this value, or `None` if it&#39;s not an f32
+        &#34;&#34;&#34;
+        if self.__raw__.kind == WASM_F32.value:
+            return self.__raw__.of.f32
+        else:
+            return None
+
+    def as_f64(self):
+        &#34;&#34;&#34;
+        Get the 64-bit float value of this value, or `None` if it&#39;s not an f64
+        &#34;&#34;&#34;
+        if self.__raw__.kind == WASM_F64.value:
+            return self.__raw__.of.f64
+        else:
+            return None
+
+    @property
+    def type(self):
+        &#34;&#34;&#34;
+        Returns the `ValType` corresponding to this `Val`
+        &#34;&#34;&#34;
+        ptr = dll.wasm_valtype_new(self.__raw__.kind)
+        return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="wasmtime.Val.f32"><code class="name flex">
+<span>def <span class="ident">f32</span></span>(<span>val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new 32-bit float value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def f32(cls, val):
+    &#34;&#34;&#34;
+    Create a new 32-bit float value
+    &#34;&#34;&#34;
+    if not isinstance(val, float):
+        raise TypeError(&#34;expected a float&#34;)
+    ffi = wasm_val_t(WASM_F32)
+    ffi.of.f32 = val
+    return Val(ffi)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.f64"><code class="name flex">
+<span>def <span class="ident">f64</span></span>(<span>val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new 64-bit float value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def f64(cls, val):
+    &#34;&#34;&#34;
+    Create a new 64-bit float value
+    &#34;&#34;&#34;
+    if not isinstance(val, float):
+        raise TypeError(&#34;expected a float&#34;)
+    ffi = wasm_val_t(WASM_F64)
+    ffi.of.f64 = val
+    return Val(ffi)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.i32"><code class="name flex">
+<span>def <span class="ident">i32</span></span>(<span>val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new 32-bit integer value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def i32(cls, val):
+    &#34;&#34;&#34;
+    Create a new 32-bit integer value
+    &#34;&#34;&#34;
+    if not is_integer(val):
+        raise TypeError(&#34;expected an integer&#34;)
+    ffi = wasm_val_t(WASM_I32)
+    ffi.of.i32 = val
+    return Val(ffi)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.i64"><code class="name flex">
+<span>def <span class="ident">i64</span></span>(<span>val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Create a new 64-bit integer value</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def i64(cls, val):
+    &#34;&#34;&#34;
+    Create a new 64-bit integer value
+    &#34;&#34;&#34;
+    if not is_integer(val):
+        raise TypeError(&#34;expected an integer&#34;)
+    ffi = wasm_val_t(WASM_I64)
+    ffi.of.i64 = val
+    return Val(ffi)</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.Val.type"><code class="name">var <span class="ident">type</span></code></dt>
+<dd>
+<div class="desc"><p>Returns the <code><a title="wasmtime.ValType" href="#wasmtime.ValType">ValType</a></code> corresponding to this <code><a title="wasmtime.Val" href="#wasmtime.Val">Val</a></code></p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def type(self):
+    &#34;&#34;&#34;
+    Returns the `ValType` corresponding to this `Val`
+    &#34;&#34;&#34;
+    ptr = dll.wasm_valtype_new(self.__raw__.kind)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.value"><code class="name">var <span class="ident">value</span></code></dt>
+<dd>
+<div class="desc"><p>Get the the underlying value as a python value</p>
+<p>Returns <code>None</code> if the value can't be represented in Python</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def value(self):
+    &#34;&#34;&#34;
+    Get the the underlying value as a python value
+
+    Returns `None` if the value can&#39;t be represented in Python
+    &#34;&#34;&#34;
+    if self.__raw__.kind == WASM_I32.value:
+        return self.__raw__.of.i32
+    if self.__raw__.kind == WASM_I64.value:
+        return self.__raw__.of.i64
+    if self.__raw__.kind == WASM_F32.value:
+        return self.__raw__.of.f32
+    if self.__raw__.kind == WASM_F64.value:
+        return self.__raw__.of.f64
+    return None</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.Val.as_f32"><code class="name flex">
+<span>def <span class="ident">as_f32</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the 32-bit float value of this value, or <code>None</code> if it's not an f32</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_f32(self):
+    &#34;&#34;&#34;
+    Get the 32-bit float value of this value, or `None` if it&#39;s not an f32
+    &#34;&#34;&#34;
+    if self.__raw__.kind == WASM_F32.value:
+        return self.__raw__.of.f32
+    else:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.as_f64"><code class="name flex">
+<span>def <span class="ident">as_f64</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the 64-bit float value of this value, or <code>None</code> if it's not an f64</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_f64(self):
+    &#34;&#34;&#34;
+    Get the 64-bit float value of this value, or `None` if it&#39;s not an f64
+    &#34;&#34;&#34;
+    if self.__raw__.kind == WASM_F64.value:
+        return self.__raw__.of.f64
+    else:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.as_i32"><code class="name flex">
+<span>def <span class="ident">as_i32</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the 32-bit integer value of this value, or <code>None</code> if it's not an i32</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_i32(self):
+    &#34;&#34;&#34;
+    Get the 32-bit integer value of this value, or `None` if it&#39;s not an i32
+    &#34;&#34;&#34;
+    if self.__raw__.kind == WASM_I32.value:
+        return self.__raw__.of.i32
+    else:
+        return None</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.Val.as_i64"><code class="name flex">
+<span>def <span class="ident">as_i64</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Get the 64-bit integer value of this value, or <code>None</code> if it's not an i64</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def as_i64(self):
+    &#34;&#34;&#34;
+    Get the 64-bit integer value of this value, or `None` if it&#39;s not an i64
+    &#34;&#34;&#34;
+    if self.__raw__.kind == WASM_I64.value:
+        return self.__raw__.of.i64
+    else:
+        return None</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.ValType"><code class="flex name class">
+<span>class <span class="ident">ValType</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class ValType(object):
+    @classmethod
+    def i32(cls):
+        ptr = dll.wasm_valtype_new(WASM_I32)
+        return ValType.__from_ptr__(ptr, None)
+
+    @classmethod
+    def i64(cls):
+        ptr = dll.wasm_valtype_new(WASM_I64)
+        return ValType.__from_ptr__(ptr, None)
+
+    @classmethod
+    def f32(cls):
+        ptr = dll.wasm_valtype_new(WASM_F32)
+        return ValType.__from_ptr__(ptr, None)
+
+    @classmethod
+    def f64(cls):
+        ptr = dll.wasm_valtype_new(WASM_F64)
+        return ValType.__from_ptr__(ptr, None)
+
+    @classmethod
+    def anyref(cls):
+        ptr = dll.wasm_valtype_new(WASM_ANYREF)
+        return ValType.__from_ptr__(ptr, None)
+
+    @classmethod
+    def funcref(cls):
+        ptr = dll.wasm_valtype_new(WASM_FUNCREF)
+        return ValType.__from_ptr__(ptr, None)
+
+    def __init__(self):
+        raise WasmtimeError(&#34;cannot construct directly&#34;)
+
+    @classmethod
+    def __from_ptr__(cls, ptr, owner):
+        ty = cls.__new__(cls)
+        if not isinstance(ptr, P_wasm_valtype_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        ty.__ptr__ = ptr
+        ty.__owner__ = owner
+        return ty
+
+    def __eq__(self, other):
+        if not isinstance(other, ValType):
+            return False
+        assert(self.__ptr__ is not None)
+        assert(other.__ptr__ is not None)
+        kind1 = dll.wasm_valtype_kind(self.__ptr__)
+        kind2 = dll.wasm_valtype_kind(other.__ptr__)
+        return kind1 == kind2
+
+    def __ne__(self, other):
+        return not self.__eq__(other)
+
+    def __repr__(self):
+        return str(self)
+
+    def __str__(self):
+        assert(self.__ptr__ is not None)
+        kind = dll.wasm_valtype_kind(self.__ptr__)
+        if kind == WASM_I32.value:
+            return &#39;i32&#39;
+        if kind == WASM_I64.value:
+            return &#39;i64&#39;
+        if kind == WASM_F32.value:
+            return &#39;f32&#39;
+        if kind == WASM_F64.value:
+            return &#39;f64&#39;
+        if kind == WASM_ANYREF.value:
+            return &#39;anyref&#39;
+        if kind == WASM_FUNCREF.value:
+            return &#39;funcref&#39;
+        return &#39;ValType(%d)&#39; % kind
+
+    def __del__(self):
+        if not hasattr(self, &#39;__owner__&#39;) or not hasattr(self, &#39;__ptr__&#39;):
+            return
+        # If this is owned by another object we don&#39;t free it since that object
+        # is responsible for freeing the backing memory.
+        if self.__owner__ is None:
+            dll.wasm_valtype_delete(self.__ptr__)
+
+    @classmethod
+    def __from_list__(cls, items, owner):
+        types = []
+        for i in range(0, items.contents.size):
+            types.append(ValType.__from_ptr__(items.contents.data[i], owner))
+        return types</code></pre>
+</details>
+<h3>Static methods</h3>
+<dl>
+<dt id="wasmtime.ValType.anyref"><code class="name flex">
+<span>def <span class="ident">anyref</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def anyref(cls):
+    ptr = dll.wasm_valtype_new(WASM_ANYREF)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ValType.f32"><code class="name flex">
+<span>def <span class="ident">f32</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def f32(cls):
+    ptr = dll.wasm_valtype_new(WASM_F32)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ValType.f64"><code class="name flex">
+<span>def <span class="ident">f64</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def f64(cls):
+    ptr = dll.wasm_valtype_new(WASM_F64)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ValType.funcref"><code class="name flex">
+<span>def <span class="ident">funcref</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def funcref(cls):
+    ptr = dll.wasm_valtype_new(WASM_FUNCREF)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ValType.i32"><code class="name flex">
+<span>def <span class="ident">i32</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def i32(cls):
+    ptr = dll.wasm_valtype_new(WASM_I32)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.ValType.i64"><code class="name flex">
+<span>def <span class="ident">i64</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@classmethod
+def i64(cls):
+    ptr = dll.wasm_valtype_new(WASM_I64)
+    return ValType.__from_ptr__(ptr, None)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.WasiConfig"><code class="flex name class">
+<span>class <span class="ident">WasiConfig</span></span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class WasiConfig(object):
+    def __init__(self):
+        self.__ptr__ = dll.wasi_config_new()
+
+    @setter_property
+    def set_argv(self, argv):
+        &#34;&#34;&#34;
+        Explicitly configure the `argv` for this WASI configuration
+        &#34;&#34;&#34;
+        ptrs = to_char_array(argv)
+        dll.wasi_config_set_argv(self.__ptr__, c_int(len(argv)), ptrs)
+
+    def inherit_argv(self):
+        dll.wasi_config_inherit_argv(self.__ptr__)
+
+    @setter_property
+    def env(self, pairs):
+        &#34;&#34;&#34;
+        Configure environment variables to be returned for this WASI
+        configuration.
+
+        The `pairs` provided must be an iterable list of key/value pairs of
+        environment variables.
+        &#34;&#34;&#34;
+        names = []
+        values = []
+        for name, value in pairs:
+            names.append(name)
+            values.append(value)
+        name_ptrs = to_char_array(names)
+        value_ptrs = to_char_array(values)
+        dll.wasi_config_set_env(self.__ptr__, c_int(
+            len(names)), name_ptrs, value_ptrs)
+
+    def inherit_env(self):
+        dll.wasi_config_inherit_env(self.__ptr__)
+
+    @setter_property
+    def stdin_file(self, path):
+        dll.wasi_config_set_stdin_file(
+            self.__ptr__, c_char_p(path.encode(&#39;utf-8&#39;)))
+
+    def inherit_stdin(self):
+        dll.wasi_config_inherit_stdin(self.__ptr__)
+
+    @setter_property
+    def stdout_file(self, path):
+        dll.wasi_config_set_stdout_file(
+            self.__ptr__, c_char_p(path.encode(&#39;utf-8&#39;)))
+
+    def inherit_stdout(self):
+        dll.wasi_config_inherit_stdout(self.__ptr__)
+
+    @setter_property
+    def stderr_file(self, path):
+        dll.wasi_config_set_stderr_file(
+            self.__ptr__, c_char_p(path.encode(&#39;utf-8&#39;)))
+
+    def inherit_stderr(self):
+        dll.wasi_config_inherit_stderr(self.__ptr__)
+
+    def preopen_dir(self, path, guest_path):
+        path_ptr = c_char_p(path.encode(&#39;utf-8&#39;))
+        guest_path_ptr = c_char_p(guest_path.encode(&#39;utf-8&#39;))
+        dll.wasi_config_preopen_dir(self.__ptr__, path_ptr, guest_path_ptr)
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasi_config_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Instance variables</h3>
+<dl>
+<dt id="wasmtime.WasiConfig.env"><code class="name">var <span class="ident">env</span></code></dt>
+<dd>
+<div class="desc"><p>Configure environment variables to be returned for this WASI
+configuration.</p>
+<p>The <code>pairs</code> provided must be an iterable list of key/value pairs of
+environment variables.</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.WasiConfig.set_argv"><code class="name">var <span class="ident">set_argv</span></code></dt>
+<dd>
+<div class="desc"><p>Explicitly configure the <code>argv</code> for this WASI configuration</p>
+<p>Note that this field can only be set, it cannot be read</p></div>
+</dd>
+<dt id="wasmtime.WasiConfig.stderr_file"><code class="name">var <span class="ident">stderr_file</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="wasmtime.WasiConfig.stdin_file"><code class="name">var <span class="ident">stdin_file</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="wasmtime.WasiConfig.stdout_file"><code class="name">var <span class="ident">stdout_file</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.WasiConfig.inherit_argv"><code class="name flex">
+<span>def <span class="ident">inherit_argv</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inherit_argv(self):
+    dll.wasi_config_inherit_argv(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.WasiConfig.inherit_env"><code class="name flex">
+<span>def <span class="ident">inherit_env</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inherit_env(self):
+    dll.wasi_config_inherit_env(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.WasiConfig.inherit_stderr"><code class="name flex">
+<span>def <span class="ident">inherit_stderr</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inherit_stderr(self):
+    dll.wasi_config_inherit_stderr(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.WasiConfig.inherit_stdin"><code class="name flex">
+<span>def <span class="ident">inherit_stdin</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inherit_stdin(self):
+    dll.wasi_config_inherit_stdin(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.WasiConfig.inherit_stdout"><code class="name flex">
+<span>def <span class="ident">inherit_stdout</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inherit_stdout(self):
+    dll.wasi_config_inherit_stdout(self.__ptr__)</code></pre>
+</details>
+</dd>
+<dt id="wasmtime.WasiConfig.preopen_dir"><code class="name flex">
+<span>def <span class="ident">preopen_dir</span></span>(<span>self, path, guest_path)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def preopen_dir(self, path, guest_path):
+    path_ptr = c_char_p(path.encode(&#39;utf-8&#39;))
+    guest_path_ptr = c_char_p(guest_path.encode(&#39;utf-8&#39;))
+    dll.wasi_config_preopen_dir(self.__ptr__, path_ptr, guest_path_ptr)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.WasiInstance"><code class="flex name class">
+<span>class <span class="ident">WasiInstance</span></span>
+<span>(</span><span>store, name, config)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class WasiInstance(object):
+    def __init__(self, store, name, config):
+        if not isinstance(store, Store):
+            raise TypeError(&#34;expected a `Store`&#34;)
+        if not isinstance(name, str):
+            raise TypeError(&#34;expected a `str`&#34;)
+        name = name.encode(&#39;utf-8&#39;)
+        if not isinstance(config, WasiConfig):
+            raise TypeError(&#34;expected a `WasiConfig`&#34;)
+        ptr = config.__ptr__
+        delattr(config, &#39;__ptr__&#39;)
+
+        trap = P_wasm_trap_t()
+        ptr = dll.wasi_instance_new(
+            store.__ptr__, c_char_p(name), ptr, byref(trap))
+        if not ptr:
+            if trap:
+                raise Trap.__from_ptr__(trap)
+            raise WasmtimeError(&#34;failed to create wasi instance&#34;)
+        self.__ptr__ = ptr
+        self.store = store
+
+    def bind(self, import_):
+        if not isinstance(import_, ImportType):
+            raise TypeError(&#34;expected an `ImportType`&#34;)
+        ptr = dll.wasi_instance_bind_import(self.__ptr__, import_.__ptr__)
+        if ptr:
+            return wrap_extern(ptr, self)
+        else:
+            return None
+
+    def __del__(self):
+        if hasattr(self, &#39;__ptr__&#39;):
+            dll.wasi_instance_delete(self.__ptr__)</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="wasmtime.WasiInstance.bind"><code class="name flex">
+<span>def <span class="ident">bind</span></span>(<span>self, import_)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def bind(self, import_):
+    if not isinstance(import_, ImportType):
+        raise TypeError(&#34;expected an `ImportType`&#34;)
+    ptr = dll.wasi_instance_bind_import(self.__ptr__, import_.__ptr__)
+    if ptr:
+        return wrap_extern(ptr, self)
+    else:
+        return None</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+<dt id="wasmtime.WasmtimeError"><code class="flex name class">
+<span>class <span class="ident">WasmtimeError</span></span>
+<span>(</span><span>message)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Common base class for all non-exit exceptions.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class WasmtimeError(Exception):
+    def __init__(self, message):
+        self.message = message
+
+    @classmethod
+    def __from_ptr__(cls, ptr):
+        if not isinstance(ptr, P_wasmtime_error_t):
+            raise TypeError(&#34;wrong pointer type&#34;)
+        message_vec = wasm_byte_vec_t()
+        dll.wasmtime_error_message(ptr, byref(message_vec))
+        message = message_vec.to_str()
+        dll.wasm_byte_vec_delete(byref(message_vec))
+        dll.wasmtime_error_delete(ptr)
+        return WasmtimeError(message)
+
+    def __str__(self):
+        return self.message</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.Exception</li>
+<li>builtins.BaseException</li>
+</ul>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="wasmtime.loader" href="loader.html">wasmtime.loader</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="wasmtime.wat2wasm" href="#wasmtime.wat2wasm">wat2wasm</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="wasmtime.Caller" href="#wasmtime.Caller">Caller</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Caller.get" href="#wasmtime.Caller.get">get</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Config" href="#wasmtime.Config">Config</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Config.cache" href="#wasmtime.Config.cache">cache</a></code></li>
+<li><code><a title="wasmtime.Config.cranelift_debug_verifier" href="#wasmtime.Config.cranelift_debug_verifier">cranelift_debug_verifier</a></code></li>
+<li><code><a title="wasmtime.Config.cranelift_opt_level" href="#wasmtime.Config.cranelift_opt_level">cranelift_opt_level</a></code></li>
+<li><code><a title="wasmtime.Config.debug_info" href="#wasmtime.Config.debug_info">debug_info</a></code></li>
+<li><code><a title="wasmtime.Config.interruptable" href="#wasmtime.Config.interruptable">interruptable</a></code></li>
+<li><code><a title="wasmtime.Config.profiler" href="#wasmtime.Config.profiler">profiler</a></code></li>
+<li><code><a title="wasmtime.Config.strategy" href="#wasmtime.Config.strategy">strategy</a></code></li>
+<li><code><a title="wasmtime.Config.wasm_bulk_memory" href="#wasmtime.Config.wasm_bulk_memory">wasm_bulk_memory</a></code></li>
+<li><code><a title="wasmtime.Config.wasm_multi_value" href="#wasmtime.Config.wasm_multi_value">wasm_multi_value</a></code></li>
+<li><code><a title="wasmtime.Config.wasm_reference_types" href="#wasmtime.Config.wasm_reference_types">wasm_reference_types</a></code></li>
+<li><code><a title="wasmtime.Config.wasm_simd" href="#wasmtime.Config.wasm_simd">wasm_simd</a></code></li>
+<li><code><a title="wasmtime.Config.wasm_threads" href="#wasmtime.Config.wasm_threads">wasm_threads</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Engine" href="#wasmtime.Engine">Engine</a></code></h4>
+</li>
+<li>
+<h4><code><a title="wasmtime.ExportType" href="#wasmtime.ExportType">ExportType</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.ExportType.name" href="#wasmtime.ExportType.name">name</a></code></li>
+<li><code><a title="wasmtime.ExportType.type" href="#wasmtime.ExportType.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Frame" href="#wasmtime.Frame">Frame</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Frame.func_index" href="#wasmtime.Frame.func_index">func_index</a></code></li>
+<li><code><a title="wasmtime.Frame.func_name" href="#wasmtime.Frame.func_name">func_name</a></code></li>
+<li><code><a title="wasmtime.Frame.func_offset" href="#wasmtime.Frame.func_offset">func_offset</a></code></li>
+<li><code><a title="wasmtime.Frame.module_name" href="#wasmtime.Frame.module_name">module_name</a></code></li>
+<li><code><a title="wasmtime.Frame.module_offset" href="#wasmtime.Frame.module_offset">module_offset</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Func" href="#wasmtime.Func">Func</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Func.param_arity" href="#wasmtime.Func.param_arity">param_arity</a></code></li>
+<li><code><a title="wasmtime.Func.result_arity" href="#wasmtime.Func.result_arity">result_arity</a></code></li>
+<li><code><a title="wasmtime.Func.type" href="#wasmtime.Func.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.FuncType" href="#wasmtime.FuncType">FuncType</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.FuncType.params" href="#wasmtime.FuncType.params">params</a></code></li>
+<li><code><a title="wasmtime.FuncType.results" href="#wasmtime.FuncType.results">results</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Global" href="#wasmtime.Global">Global</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Global.type" href="#wasmtime.Global.type">type</a></code></li>
+<li><code><a title="wasmtime.Global.value" href="#wasmtime.Global.value">value</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.GlobalType" href="#wasmtime.GlobalType">GlobalType</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.GlobalType.content" href="#wasmtime.GlobalType.content">content</a></code></li>
+<li><code><a title="wasmtime.GlobalType.mutable" href="#wasmtime.GlobalType.mutable">mutable</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.ImportType" href="#wasmtime.ImportType">ImportType</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.ImportType.module" href="#wasmtime.ImportType.module">module</a></code></li>
+<li><code><a title="wasmtime.ImportType.name" href="#wasmtime.ImportType.name">name</a></code></li>
+<li><code><a title="wasmtime.ImportType.type" href="#wasmtime.ImportType.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Instance" href="#wasmtime.Instance">Instance</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Instance.exports" href="#wasmtime.Instance.exports">exports</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Limits" href="#wasmtime.Limits">Limits</a></code></h4>
+</li>
+<li>
+<h4><code><a title="wasmtime.Linker" href="#wasmtime.Linker">Linker</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Linker.allow_shadowing" href="#wasmtime.Linker.allow_shadowing">allow_shadowing</a></code></li>
+<li><code><a title="wasmtime.Linker.define" href="#wasmtime.Linker.define">define</a></code></li>
+<li><code><a title="wasmtime.Linker.define_instance" href="#wasmtime.Linker.define_instance">define_instance</a></code></li>
+<li><code><a title="wasmtime.Linker.define_wasi" href="#wasmtime.Linker.define_wasi">define_wasi</a></code></li>
+<li><code><a title="wasmtime.Linker.instantiate" href="#wasmtime.Linker.instantiate">instantiate</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Memory" href="#wasmtime.Memory">Memory</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Memory.data_len" href="#wasmtime.Memory.data_len">data_len</a></code></li>
+<li><code><a title="wasmtime.Memory.data_ptr" href="#wasmtime.Memory.data_ptr">data_ptr</a></code></li>
+<li><code><a title="wasmtime.Memory.grow" href="#wasmtime.Memory.grow">grow</a></code></li>
+<li><code><a title="wasmtime.Memory.size" href="#wasmtime.Memory.size">size</a></code></li>
+<li><code><a title="wasmtime.Memory.type" href="#wasmtime.Memory.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.MemoryType" href="#wasmtime.MemoryType">MemoryType</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.MemoryType.limits" href="#wasmtime.MemoryType.limits">limits</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Module" href="#wasmtime.Module">Module</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Module.exports" href="#wasmtime.Module.exports">exports</a></code></li>
+<li><code><a title="wasmtime.Module.from_file" href="#wasmtime.Module.from_file">from_file</a></code></li>
+<li><code><a title="wasmtime.Module.imports" href="#wasmtime.Module.imports">imports</a></code></li>
+<li><code><a title="wasmtime.Module.validate" href="#wasmtime.Module.validate">validate</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Store" href="#wasmtime.Store">Store</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Store.interrupt_handle" href="#wasmtime.Store.interrupt_handle">interrupt_handle</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Table" href="#wasmtime.Table">Table</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Table.grow" href="#wasmtime.Table.grow">grow</a></code></li>
+<li><code><a title="wasmtime.Table.size" href="#wasmtime.Table.size">size</a></code></li>
+<li><code><a title="wasmtime.Table.type" href="#wasmtime.Table.type">type</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.TableType" href="#wasmtime.TableType">TableType</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.TableType.element" href="#wasmtime.TableType.element">element</a></code></li>
+<li><code><a title="wasmtime.TableType.limits" href="#wasmtime.TableType.limits">limits</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Trap" href="#wasmtime.Trap">Trap</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.Trap.frames" href="#wasmtime.Trap.frames">frames</a></code></li>
+<li><code><a title="wasmtime.Trap.message" href="#wasmtime.Trap.message">message</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.Val" href="#wasmtime.Val">Val</a></code></h4>
+<ul class="two-column">
+<li><code><a title="wasmtime.Val.as_f32" href="#wasmtime.Val.as_f32">as_f32</a></code></li>
+<li><code><a title="wasmtime.Val.as_f64" href="#wasmtime.Val.as_f64">as_f64</a></code></li>
+<li><code><a title="wasmtime.Val.as_i32" href="#wasmtime.Val.as_i32">as_i32</a></code></li>
+<li><code><a title="wasmtime.Val.as_i64" href="#wasmtime.Val.as_i64">as_i64</a></code></li>
+<li><code><a title="wasmtime.Val.f32" href="#wasmtime.Val.f32">f32</a></code></li>
+<li><code><a title="wasmtime.Val.f64" href="#wasmtime.Val.f64">f64</a></code></li>
+<li><code><a title="wasmtime.Val.i32" href="#wasmtime.Val.i32">i32</a></code></li>
+<li><code><a title="wasmtime.Val.i64" href="#wasmtime.Val.i64">i64</a></code></li>
+<li><code><a title="wasmtime.Val.type" href="#wasmtime.Val.type">type</a></code></li>
+<li><code><a title="wasmtime.Val.value" href="#wasmtime.Val.value">value</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.ValType" href="#wasmtime.ValType">ValType</a></code></h4>
+<ul class="two-column">
+<li><code><a title="wasmtime.ValType.anyref" href="#wasmtime.ValType.anyref">anyref</a></code></li>
+<li><code><a title="wasmtime.ValType.f32" href="#wasmtime.ValType.f32">f32</a></code></li>
+<li><code><a title="wasmtime.ValType.f64" href="#wasmtime.ValType.f64">f64</a></code></li>
+<li><code><a title="wasmtime.ValType.funcref" href="#wasmtime.ValType.funcref">funcref</a></code></li>
+<li><code><a title="wasmtime.ValType.i32" href="#wasmtime.ValType.i32">i32</a></code></li>
+<li><code><a title="wasmtime.ValType.i64" href="#wasmtime.ValType.i64">i64</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.WasiConfig" href="#wasmtime.WasiConfig">WasiConfig</a></code></h4>
+<ul class="two-column">
+<li><code><a title="wasmtime.WasiConfig.env" href="#wasmtime.WasiConfig.env">env</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.inherit_argv" href="#wasmtime.WasiConfig.inherit_argv">inherit_argv</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.inherit_env" href="#wasmtime.WasiConfig.inherit_env">inherit_env</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.inherit_stderr" href="#wasmtime.WasiConfig.inherit_stderr">inherit_stderr</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.inherit_stdin" href="#wasmtime.WasiConfig.inherit_stdin">inherit_stdin</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.inherit_stdout" href="#wasmtime.WasiConfig.inherit_stdout">inherit_stdout</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.preopen_dir" href="#wasmtime.WasiConfig.preopen_dir">preopen_dir</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.set_argv" href="#wasmtime.WasiConfig.set_argv">set_argv</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.stderr_file" href="#wasmtime.WasiConfig.stderr_file">stderr_file</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.stdin_file" href="#wasmtime.WasiConfig.stdin_file">stdin_file</a></code></li>
+<li><code><a title="wasmtime.WasiConfig.stdout_file" href="#wasmtime.WasiConfig.stdout_file">stdout_file</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.WasiInstance" href="#wasmtime.WasiInstance">WasiInstance</a></code></h4>
+<ul class="">
+<li><code><a title="wasmtime.WasiInstance.bind" href="#wasmtime.WasiInstance.bind">bind</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="wasmtime.WasmtimeError" href="#wasmtime.WasmtimeError">WasmtimeError</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
